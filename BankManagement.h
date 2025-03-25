@@ -86,7 +86,7 @@ class BankAccount {
         // Returns the current balance
         double getBalance() const { return balance; }
         
-        "'Closes' the account by setting isActive to false"
+        // "Closes" the account by setting isActive to false"
         void closeAccount() {
             isActive = false;
         }
