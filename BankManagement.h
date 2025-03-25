@@ -80,7 +80,7 @@ class BankAccount {
             }
             // Catch the invalid account exception
             catch (InvalidAccountOperationException& e) {
-                "Error: " << e.what() << endl;
+                cout <<"Error: " << e.what() << endl;
             }
         }
         // Returns the current balance
