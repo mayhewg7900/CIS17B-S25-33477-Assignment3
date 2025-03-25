@@ -43,33 +43,50 @@ class BankAccount {
         BankAccount(string s, double b): accountNumber(s), balance(b) {}
         void deposit(double amount) {
             try {
+                // If account is inactive, throw an exception
                 if (!isActive) {
                     throw InvalidAccountOperationException("Error, account has been closed.");
                 }
+                // If the amount entered is a negative value, throw an exception
                 if(amount < 0) {
                     throw OverdrawException("Error, negative input");
                 }    
                 balance += amount;
             }
+            // Catch the overdraw exception
             catch(OverdrawException &e) {
+                cout << "Error: " << e.what() << endl;
+            }
+            // Catch the invalid account exception
+            catch (InvalidAccountOperationException& e) {
                 cout << "Error: " << e.what() << endl;
             }
         }
         void withdraw(double amount) {
             try {
+                // If account is inactive, throw an exception
                 if (!isActive) {
                     throw InvalidAccountOperationException("Error, account has been closed.");
                 }
-                if(amount >= balance) {
+                // If the amount requested is more than the balance, throw an exception
+                if(amount > balance) {
                     throw NegativeDepositException("Error, cannot overdraw");
                 }
                 balance -= amount;
             }
+            // Catch the negative deposit exception
             catch(NegativeDepositException &e) {
                 cout << "Error: " << e.what() << endl;
             }
+            // Catch the invalid account exception
+            catch (InvalidAccountOperationException& e) {
+                "Error: " << e.what() << endl;
+            }
         }
+        // Returns the current balance
         double getBalance() const { return balance; }
+        
+        "'Closes' the account by setting isActive to false"
         void closeAccount() {
             isActive = false;
         }
