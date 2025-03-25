@@ -43,12 +43,12 @@ class BankAccount {
         BankAccount(string s, double b): accountNumber(s), balance(b) {}
         void deposit(double amount) {
             try {
-                if(amount < 0) {
-                    throw OverdrawException("Error, cannot overdraw");
-                }
-                if(!isActive) {
+                if (!isActive) {
                     throw InvalidAccountOperationException("Error, account has been closed.");
                 }
+                if(amount < 0) {
+                    throw OverdrawException("Error, negative input");
+                }    
                 balance += amount;
             }
             catch(OverdrawException &e) {
@@ -57,11 +57,11 @@ class BankAccount {
         }
         void withdraw(double amount) {
             try {
-                if(amount >= balance) {
-                    throw NegativeDepositException("Error, negative input");
-                }
-                if(!isActive) {
+                if (!isActive) {
                     throw InvalidAccountOperationException("Error, account has been closed.");
+                }
+                if(amount >= balance) {
+                    throw NegativeDepositException("Error, cannot overdraw");
                 }
                 balance -= amount;
             }
